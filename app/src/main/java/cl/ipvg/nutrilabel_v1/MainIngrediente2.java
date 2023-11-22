@@ -56,18 +56,6 @@ public class MainIngrediente2 extends AppCompatActivity {
         hdcI = findViewById(R.id.editTextText5);
         sodI = findViewById(R.id.editTextText6);
 
-        //textE = enerI.getText().toString();
-        //enerIt = Float.parseFloat(textE);
-        //textP = proteI.getText().toString();
-        //proIt = Float.parseFloat(textP);
-        //textG = grasI.getText().toString();
-        //grasIt = Float.parseFloat(textG);
-        //textHdc = hdcI.getText().toString();
-        //hdcIt = Float.parseFloat(textHdc);
-        //textS = sodI.getText().toString();
-        //sodIt = Float.parseFloat(textS);
-
-
 
         inicializarFireBase();
         listarI();
@@ -79,6 +67,16 @@ public class MainIngrediente2 extends AppCompatActivity {
         btAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                textE = enerI.getText().toString();
+                enerIt = Float.parseFloat(textE);
+                textP = proteI.getText().toString();
+                proIt = Float.parseFloat(textP);
+                textG = grasI.getText().toString();
+                grasIt = Float.parseFloat(textG);
+                textHdc = hdcI.getText().toString();
+                hdcIt = Float.parseFloat(textHdc);
+                textS = sodI.getText().toString();
+                sodIt = Float.parseFloat(textS);
                 ingrediente ing1 = new ingrediente();
                 ing1.setIdIng(UUID.randomUUID().toString());
                 ing1.setNombreI(nomI.getText().toString());

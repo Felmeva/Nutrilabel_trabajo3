@@ -73,11 +73,17 @@ public class MainReceta3 extends AppCompatActivity {
         btCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                txt1 = gr1R.getText().toString();
+                gr1 = Float.parseFloat(txt1);
+
                 receta rec1 = new receta();
 
                 rec1.setIdReceta(UUID.randomUUID().toString());
                 rec1.setNombreR(nomR.getText().toString());
                 rec1.setGrR(gr1);
+                databaseReference.child("receta").child(rec1.getIdReceta()).setValue(rec1);
+
+
 
             }
         });
@@ -102,7 +108,7 @@ public class MainReceta3 extends AppCompatActivity {
                 for (DataSnapshot objs : snapshot.getChildren()){
                     receta rec =objs.getValue(receta.class);
                     ListRe.add(rec);
-                    ListReceta.add("" + rec.getIdReceta() + " " + rec.getNombreR() + " " + rec.getGrR());
+                    ListReceta.add( "" + rec.getNombreR());
                     recetaArrayAdapter = new ArrayAdapter<String>(MainReceta3.this, android.R.layout.simple_expandable_list_item_1,ListReceta);
                     ingS1.setAdapter(recetaArrayAdapter);
                     ingS2.setAdapter(recetaArrayAdapter);
