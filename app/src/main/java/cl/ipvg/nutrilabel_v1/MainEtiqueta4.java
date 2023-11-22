@@ -20,8 +20,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
+import java.util.UUID;
 
+import cl.ipvg.nutrilabel_v1.clases.etiqueta;
 import cl.ipvg.nutrilabel_v1.clases.ingrediente;
+import cl.ipvg.nutrilabel_v1.clases.receta;
 
 public class MainEtiqueta4 extends AppCompatActivity {
 
@@ -29,11 +32,6 @@ public class MainEtiqueta4 extends AppCompatActivity {
     private ImageButton btVolver;
     private Spinner verS;
     private ListView listEt;
-
-
-
-
-
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
@@ -54,6 +52,17 @@ public class MainEtiqueta4 extends AppCompatActivity {
          btGenerar.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
+                 ingrediente ing1 = new ingrediente();
+                 receta rece1 = new receta();
+                 etiqueta et1 = new etiqueta();
+
+                 et1.setIdEtiqueta(UUID.randomUUID().toString());
+                 et1.setEneEt(et1.calcularEnergia(ing1.getEnergiaI(),rece1.getGrR()));
+                 et1.setProEt(et1.calcularProteinas(ing1.getProteinasI(), rece1.getGrR()));
+                 et1.setGrasEt(et1.calcularGrasas(ing1.getGrasasI(), rece1.getGrR()));
+                 et1.setHdcEt(et1.calcularHdc(ing1.getHdcI(), rece1.getGrR()));
+                 et1.setSodEt(et1.calcularSodio(ing1.getSodioI(), rece1.getGrR()));
+                 databaseReference.child("etiqueta").child(et1.getIdEtiqueta()).setValue(et1);
 
              }
          });
@@ -82,6 +91,7 @@ public class MainEtiqueta4 extends AppCompatActivity {
         databaseReference.child("etiqueta").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
 
             }
 
