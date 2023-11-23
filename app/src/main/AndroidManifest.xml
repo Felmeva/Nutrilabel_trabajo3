@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nutrilabel_v1"
         tools:targetApi="31">
+
         <activity
             android:name=".MainEtiqueta4"
             android:exported="false" />
