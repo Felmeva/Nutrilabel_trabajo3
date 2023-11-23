@@ -39,6 +39,8 @@ public class MainReceta3 extends AppCompatActivity {
     private List<String> ListReceta = new ArrayList();
     ArrayAdapter<String> recetaArrayAdapter;
 
+    public ArrayAdapter<String> ingredienteArrayAdapter;
+
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
@@ -46,6 +48,8 @@ public class MainReceta3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+
+
 
         btCrear = findViewById(R.id.button6);
         btVolver = findViewById(R.id.imageButton2);
@@ -73,17 +77,11 @@ public class MainReceta3 extends AppCompatActivity {
         btCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txt1 = gr1R.getText().toString();
-                gr1 = Float.parseFloat(txt1);
-
                 receta rec1 = new receta();
 
                 rec1.setIdReceta(UUID.randomUUID().toString());
                 rec1.setNombreR(nomR.getText().toString());
                 rec1.setGrR(gr1);
-                databaseReference.child("receta").child(rec1.getIdReceta()).setValue(rec1);
-
-
 
             }
         });
@@ -108,8 +106,9 @@ public class MainReceta3 extends AppCompatActivity {
                 for (DataSnapshot objs : snapshot.getChildren()){
                     receta rec =objs.getValue(receta.class);
                     ListRe.add(rec);
-                    ListReceta.add( "" + rec.getNombreR());
+                    ListReceta.add("" + rec.getIdReceta() + " " + rec.getNombreR() + " " + rec.getGrR());
                     recetaArrayAdapter = new ArrayAdapter<String>(MainReceta3.this, android.R.layout.simple_expandable_list_item_1,ListReceta);
+
                     ingS1.setAdapter(recetaArrayAdapter);
                     ingS2.setAdapter(recetaArrayAdapter);
                     ingS3.setAdapter(recetaArrayAdapter);
